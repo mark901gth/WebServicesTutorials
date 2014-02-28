@@ -1,54 +1,48 @@
 package javabrains.action;
 
+import javabrains.model.User;
+import javabrains.service.LoginService;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.xml.internal.ws.util.StringUtils;
 
 public class LoginAction extends ActionSupport
 {
-    private String userId;
-    private String password;
+    private User user;
 
-    public String getUserId()
-    {
-        return userId;
-    }
-
-
-    public void setUserId(String userId)
-    {
-        this.userId = userId;
-    }
-
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
 
     public void validate()
     {
-        if ( userId.isEmpty() )
+        if ( user.getUserId().isEmpty() )
         {
             // UserId blank
             addFieldError( "userId", "User ID cannot be blank" );
         }
-        if ( password.isEmpty() )
+        if ( user.getPassword().isEmpty() )
         {
             // Password blank
             addFieldError( "password", "Password cannot be blank" );
         }
     }
-    
-    
+
+
+    public User getUser()
+    {
+        return user;
+    }
+
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+
     public String execute()
     {
-        if ( getUserId().equals( "userId" ) && getPassword().equals( "password" ) )
+        LoginService loginService = new LoginService();
+
+        if ( loginService.verifyLogin( user ) )
         {
             return SUCCESS;
         }
