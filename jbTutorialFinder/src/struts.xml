@@ -11,13 +11,28 @@
         namespace="/tutorials"
         extends="struts-default">
         <action
-            name="get*"
-            class="javabrains.action.{1}Action">
+            name="*"
+            class="javabrains.action.TutorialAction"
+            method="{1}">
             <result name="success-code">/success.jsp</result>
             <result name="failure-code">/error.jsp</result>
         </action>
+        <!-- above wildcard replaces these <action
+            name="get*"
+            class="javabrains.action.{1}Action"
+            method="getTutorial">
+            <result name="success-code">/success.jsp</result>
+            <result name="failure-code">/error.jsp</result>
+        </action>
+        <action
+            name="addTutorial"
+            class="javabrains.action.TutorialAction"
+            method="addTutorial">
+            <result name="success-code">/success.jsp</result>
+            <result name="failure-code">/error.jsp</result>
+        </action> -->
     </package>
-    
+
     <package
         name="search"
         namespace="/"
@@ -26,8 +41,7 @@
             name="searchForm">
             <result>/searchForm.jsp</result>
         </action> -->
-        <action
-            name="search*">
+        <action name="search*">
             <result>/search{1}.jsp</result>
         </action>
     </package>

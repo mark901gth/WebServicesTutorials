@@ -33,12 +33,25 @@ public class TutorialAction
     }
 
 
-    public String execute()
+    public String getTutorial()
     {
-        TutorialFinderService tutorialFinderService = new TutorialFinderService();
-        System.out.println( getLanguage() );
-        setBestTutorialSite( tutorialFinderService.getBestTutorialSite( getLanguage() ) );
+//        TutorialFinderService tutorialFinderService = new TutorialFinderService();
+//        System.out.println( getLanguage() );
+//        setBestTutorialSite( tutorialFinderService.getBestTutorialSite( getLanguage() ) );
+        System.out.println( "getTutorial() method executed." );
 
         return "success-code";
     }
+
+
+    public String addTutorial()
+    {
+//        TutorialFinderService tutorialFinderService = new TutorialFinderService();
+//        System.out.println( getLanguage() );
+//        setBestTutorialSite( tutorialFinderService.getBestTutorialSite( getLanguage() ) );
+        System.out.println( "addTutorial() method executed." );
+
+        return "success-code";
+    }
+
 }
