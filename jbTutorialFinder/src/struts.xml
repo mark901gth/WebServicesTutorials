@@ -11,8 +11,8 @@
         namespace="/tutorials"
         extends="struts-default">
         <action
-            name="getTutorial"
-            class="javabrains.action.TutorialAction">
+            name="get*"
+            class="javabrains.action.{1}Action">
             <result name="success-code">/success.jsp</result>
             <result name="failure-code">/error.jsp</result>
         </action>
@@ -22,9 +22,13 @@
         name="search"
         namespace="/"
         extends="struts-default">
-        <action
+        <!-- <action
             name="searchForm">
             <result>/searchForm.jsp</result>
+        </action> -->
+        <action
+            name="search*">
+            <result>/search{1}.jsp</result>
         </action>
     </package>
 
