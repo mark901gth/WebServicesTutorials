@@ -5,6 +5,18 @@
 <struts>
 
     <package
+        name="login"
+        namespace="/"
+        extends="struts-default">
+        <action
+            name="login"
+            class="javabrains.action.LoginAction">
+            <result name="success-code">/searchForm.jsp</result>
+            <result name="failure-code">/login.jsp</result>
+        </action>
+    </package>
+
+    <package
         name="default"
         namespace="/tutorials"
         extends="struts-default">
