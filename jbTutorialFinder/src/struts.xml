@@ -4,17 +4,7 @@
               "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-    <package
-        name="login"
-        namespace="/"
-        extends="struts-default">
-        <action
-            name="login"
-            class="javabrains.action.LoginAction">
-            <result name="success-code">/searchForm.jsp</result>
-            <result name="failure-code">/login.jsp</result>
-        </action>
-    </package>
+    <include file="login.xml" />
 
     <package
         name="default"
@@ -25,6 +15,16 @@
             class="javabrains.action.TutorialAction">
             <result name="success-code">/success.jsp</result>
             <result name="failure-code">/error.jsp</result>
+        </action>
+    </package>
+    
+    <package
+        name="search"
+        namespace="/"
+        extends="struts-default">
+        <action
+            name="searchForm">
+            <result>/searchForm.jsp</result>
         </action>
     </package>
 

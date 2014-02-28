@@ -1,10 +1,11 @@
 package javabrains.action;
 
-public class LoginAction
+import com.opensymphony.xwork2.Action;
+
+public class LoginAction implements Action
 {
     private String userId;
     private String password;
-
 
     public String getUserId()
     {
@@ -34,9 +35,9 @@ public class LoginAction
     {
         if ( getUserId().equals( "userId" ) && getPassword().equals( "password" ) )
         {
-            return "success-code";
+            return SUCCESS;
         }
-        return "failure-code";
+        return LOGIN;
 
     }
 }

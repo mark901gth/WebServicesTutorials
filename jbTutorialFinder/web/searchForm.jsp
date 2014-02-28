@@ -9,7 +9,7 @@
 <title>jbTutorialFinder: searchForm</title>
 </head>
 <body>
-<!--     <form method="post" action="tutorials/getTutorial.action">
+    <!-- form method="post" action="tutorials/getTutorial.action">
         <input id="language" name="language" />
         <input type="submit" />
     </form> -->
