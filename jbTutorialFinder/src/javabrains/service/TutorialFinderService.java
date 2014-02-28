@@ -2,8 +2,16 @@ package javabrains.service;
 
 public class TutorialFinderService
 {
-    public String getBestTutorialSite()
+    public String getBestTutorialSite(String language)
     {
-        return "Java Brains";
+        if ( language.equals( "java" ) )
+        {
+            return "Java Brains";
+        }
+        else
+        {
+            return "Language not supported yet";
+        }
+
     }
 }
