@@ -29,9 +29,10 @@ public class Circle
         this.name = name;
     }
 
+
     public Circle(int circleId, String name)
     {
-        setId(circleId);
-        setName(name);
+        setId( circleId );
+        setName( name );
     }
 }
