@@ -10,24 +10,18 @@ import javabrains.model.Circle;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JdbcDaoImpl
 {
-    public DataSource getDataSource()
-    {
-        return dataSource;
-    }
 
-    public void setDataSource(DataSource dataSource)
-    {
-        this.dataSource = dataSource;
-    }
+    private DataSource   dataSource;
 
-    @Autowired
-    private DataSource dataSource;
-    
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+
+
     public Circle getCircle(int circleId)
     {
         Connection conn = null;
@@ -35,7 +29,7 @@ public class JdbcDaoImpl
         try
         {
             conn = dataSource.getConnection();
-            
+
             PreparedStatement ps = conn.prepareStatement( "SELECT * FROM circle where id = ?" );
             ps.setInt( 1, circleId );
 
@@ -66,5 +60,35 @@ public class JdbcDaoImpl
                 e.printStackTrace();
             }
         }
+    }
+    
+    public int getCircleCount()
+    {
+        String sql = "SELECT COUNT(*) FROM CIRCLE";
+        return jdbcTemplate.queryForInt( sql );
+    }
+
+
+    public DataSource getDataSource()
+    {
+        return dataSource;
+    }
+
+    @Autowired
+    public void setDataSource(DataSource dataSource)
+    {
+        this.jdbcTemplate = new JdbcTemplate( dataSource );
+    }
+
+
+    public JdbcTemplate getJdbcTemplate()
+    {
+        return jdbcTemplate;
+    }
+
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate)
+    {
+        this.jdbcTemplate = jdbcTemplate;
     }
 }
