@@ -16,7 +16,8 @@ public class jdbcDemo
 
         //Circle circle = dao.getCircle( 1 );
         //System.out.println( circle.getName() );
-        System.out.println("Circle count: " +dao.getCircleCount());
+        System.out.println( "Circle count     : " + dao.getCircleCount() );
+        System.out.println( "Circle Name id:1 : " + dao.getCircleName( 1 ) );
     }
 
 }

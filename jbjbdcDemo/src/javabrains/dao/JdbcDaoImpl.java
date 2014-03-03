@@ -61,18 +61,35 @@ public class JdbcDaoImpl
             }
         }
     }
-    
+
+
     public int getCircleCount()
     {
         String sql = "SELECT COUNT(*) FROM CIRCLE";
-        return jdbcTemplate.queryForInt( sql );
+        return jdbcTemplate.queryForObject( sql, Integer.class );
     }
 
+
+    public String getCircleName(int circleId)
+    {
+        String sql = "SELECT NAME FROM circle where id = ?";
+        return jdbcTemplate.queryForObject( sql, new Object[]
+        { circleId }, String.class );
+    }
+
+    
+//    public Circle getCircleforId(int circleId)
+//    {
+//        String sql = "SELECT * FROM circle where id = ?";
+//        jdbcTemplate.queryForObject( sql, new Object[]
+//                { circleId }, , String.class );
+//    }
 
     public DataSource getDataSource()
     {
         return dataSource;
     }
+
 
     @Autowired
     public void setDataSource(DataSource dataSource)
