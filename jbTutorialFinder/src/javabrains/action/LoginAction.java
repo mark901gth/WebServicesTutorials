@@ -4,11 +4,12 @@ import javabrains.model.User;
 import javabrains.service.LoginService;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import com.sun.xml.internal.ws.util.StringUtils;
 
-public class LoginAction extends ActionSupport
+public class LoginAction extends ActionSupport implements ModelDriven<User>
 {
-    private User user;
+    private User user= new User();
 
 
     public void validate()
@@ -48,5 +49,12 @@ public class LoginAction extends ActionSupport
         }
         return LOGIN;
 
+    }
+
+
+    @Override
+    public User getModel()
+    {
+        return user;
     }
 }
