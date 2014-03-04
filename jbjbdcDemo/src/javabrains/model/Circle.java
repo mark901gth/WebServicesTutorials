@@ -30,6 +30,12 @@ public class Circle
     }
 
 
+    public Circle()
+    {
+        ;
+    }
+
+
     public Circle(int circleId, String name)
     {
         setId( circleId );
