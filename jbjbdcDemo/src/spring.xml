@@ -27,4 +27,15 @@
 
     </bean>
 
+
+    <bean
+        id="simpleJdbcDaoImpl"
+        class="javabrains.dao.SimpleJdbcDaoImpl">
+
+        <property
+            name="dataSource"
+            ref="dataSource" />
+
+    </bean>
+    
 </beans>

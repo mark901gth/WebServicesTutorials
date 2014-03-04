@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javabrains.dao.JdbcDaoImpl;
+import javabrains.dao.SimpleJdbcDaoImpl;
 import javabrains.model.Circle;
 
 import org.springframework.context.ApplicationContext;
@@ -15,11 +16,14 @@ public class jdbcDemo
     public static void main(String[] args)
     {
         ApplicationContext ctx = new ClassPathXmlApplicationContext( "spring.xml" );
+        
         JdbcDaoImpl dao = ctx.getBean( "jdbcDaoImpl", JdbcDaoImpl.class );
-
+        
+        SimpleJdbcDaoImpl dao_simple = ctx.getBean( "simpleJdbcDaoImpl", SimpleJdbcDaoImpl.class );
+        
         //Circle circle = dao.getCircle( 1 );
         //System.out.println( circle.getName() );
-        System.out.println( "Circle count     : " + dao.getCircleCount() );
+        System.out.println( "Circle count     : " + dao_simple.getCircleCount() );
         System.out.println( "Circle Name id:1 : " + dao.getCircleName( 1 ) );
 
         System.out.println( "using getCircleforId : " + dao.getCircleforId( 1 ).getName() );

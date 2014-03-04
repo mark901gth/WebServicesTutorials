@@ -24,6 +24,7 @@ public class JdbcDaoImpl
 
     private JdbcTemplate               jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private SimpleJdbcTemplate         simpleJdbcTemplate;
 
     /*
         //  Using jdbcTemplate eliminates the need for code like this
