@@ -1,7 +1,5 @@
 package javabrains.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,59 +11,63 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JdbcDaoImpl
 {
 
-    private DataSource   dataSource;
+    private DataSource                 dataSource;
 
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate               jdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-/*
-    //  Using jdbcTemplate eliminates the need for code like this
-    //    public Circle getCircle(int circleId)
-    //    {
-    //        Connection conn = null;
-    //
-    //        try
-    //        {
-    //            conn = dataSource.getConnection();
-    //
-    //            PreparedStatement ps = conn.prepareStatement( "SELECT * FROM circle where id = ?" );
-    //            ps.setInt( 1, circleId );
-    //
-    //            Circle circle = null;
-    //            ResultSet rs = ps.executeQuery();
-    //
-    //            if ( rs.next() )
-    //            {
-    //                circle = new Circle( circleId, rs.getString( "name" ) );
-    //            }
-    //            rs.close();
-    //            ps.close();
-    //
-    //            return circle;
-    //        }
-    //        catch ( Exception e )
-    //        {
-    //            throw new RuntimeException( e );
-    //        }
-    //        finally
-    //        {
-    //            try
-    //            {
-    //                conn.close();
-    //            }
-    //            catch ( SQLException e )
-    //            {
-    //                e.printStackTrace();
-    //            }
-    //        }
-    //    }
-*/
-    
+    /*
+        //  Using jdbcTemplate eliminates the need for code like this
+        //    public Circle getCircle(int circleId)
+        //    {
+        //        Connection conn = null;
+        //
+        //        try
+        //        {
+        //            conn = dataSource.getConnection();
+        //
+        //            PreparedStatement ps = conn.prepareStatement( "SELECT * FROM circle where id = ?" );
+        //            ps.setInt( 1, circleId );
+        //
+        //            Circle circle = null;
+        //            ResultSet rs = ps.executeQuery();
+        //
+        //            if ( rs.next() )
+        //            {
+        //                circle = new Circle( circleId, rs.getString( "name" ) );
+        //            }
+        //            rs.close();
+        //            ps.close();
+        //
+        //            return circle;
+        //        }
+        //        catch ( Exception e )
+        //        {
+        //            throw new RuntimeException( e );
+        //        }
+        //        finally
+        //        {
+        //            try
+        //            {
+        //                conn.close();
+        //            }
+        //            catch ( SQLException e )
+        //            {
+        //                e.printStackTrace();
+        //            }
+        //        }
+        //    }
+    */
+
     public int getCircleCount()
     {
         String sql = "SELECT COUNT(*) FROM CIRCLE";
@@ -110,21 +112,34 @@ public class JdbcDaoImpl
     }
 
 
+    //    public void insertCircle(Circle circle)
+    //    {
+    //        String sql = "INSERT INTO CIRCLE (ID, NAME) VALUES (?, ?)";
+    //        jdbcTemplate.update( sql, new Object[] {circle.getId(), circle.getName()} );
+    //    }
+
     public void insertCircle(Circle circle)
     {
-        String sql = "INSERT INTO CIRCLE (ID, NAME) VALUES (?, ?)";
-        jdbcTemplate.update( sql, new Object[] {circle.getId(), circle.getName()} );
+        String sql = "INSERT INTO CIRCLE (ID, NAME) VALUES (:id, :name)";
+        
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        
+        namedParameters.addValue( "id", circle.getId() );
+        namedParameters.addValue( "name", circle.getName() );
+        
+        namedParameterJdbcTemplate.update( sql, namedParameters );
     }
-    
+
+
     public void createTriangleTable()
     {
         String sql = "CREATE TABLE TRIANGLE (ID INTEGER, NAME VARCHAR(50))";
         jdbcTemplate.execute( sql );
     }
-    
-    
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     public DataSource getDataSource()
     {
         return dataSource;
@@ -135,6 +150,7 @@ public class JdbcDaoImpl
     public void setDataSource(DataSource dataSource)
     {
         this.jdbcTemplate = new JdbcTemplate( dataSource );
+        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate( dataSource );
     }
 
 
