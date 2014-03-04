@@ -24,6 +24,8 @@ public class jdbcDemo
 
         System.out.println( "using getCircleforId : " + dao.getCircleforId( 1 ).getName() );
 
+        dao.insertCircle( new Circle(3,"Third circle") );
+        
         List<Circle> listOfCircles = dao.getAllCircles();
         Circle c;
         System.out.println( "getAllCircles .size = number of circles : " + listOfCircles.size() );
@@ -35,6 +37,7 @@ public class jdbcDemo
             System.out.printf( "  Circle ID:%d NAME:%s\n", c.getId(), c.getName() );
         }
 
+        dao.createTriangleTable();
     }
 
 }

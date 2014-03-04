@@ -21,9 +21,9 @@ public class JdbcDaoImpl
 
     private DataSource   dataSource;
 
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    private JdbcTemplate jdbcTemplate;
 
-
+/*
     //  Using jdbcTemplate eliminates the need for code like this
     //    public Circle getCircle(int circleId)
     //    {
@@ -64,7 +64,8 @@ public class JdbcDaoImpl
     //            }
     //        }
     //    }
-
+*/
+    
     public int getCircleCount()
     {
         String sql = "SELECT COUNT(*) FROM CIRCLE";
@@ -109,6 +110,21 @@ public class JdbcDaoImpl
     }
 
 
+    public void insertCircle(Circle circle)
+    {
+        String sql = "INSERT INTO CIRCLE (ID, NAME) VALUES (?, ?)";
+        jdbcTemplate.update( sql, new Object[] {circle.getId(), circle.getName()} );
+    }
+    
+    public void createTriangleTable()
+    {
+        String sql = "CREATE TABLE TRIANGLE (ID INTEGER, NAME VARCHAR(50))";
+        jdbcTemplate.execute( sql );
+    }
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public DataSource getDataSource()
     {
         return dataSource;
