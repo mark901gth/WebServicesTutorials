@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Simple Form</title>
+</head>
+<body>
+
+    <form method="post" action="xmlServletPath">
+        <table>
+            <tr>
+                <td align="right">User Name:</td>
+                <td><input name="userName" /></td>
+            </tr>
+            <tr>
+                <td align="right">Full Name:</td>
+                <td><input name="fullName" /></td>
+            </tr>
+            <tr>
+                <td align="right" valign="top">Profession:</td>
+                <td>
+                    <!--                                   Ret Value  Displayed     -->
+                    <input type="radio" name="prof" value="Developer">Developer</input><br>
+                    <input type="radio" name="prof" value="Architect">Architect</input><br>
+                    <input type="radio" name="prof" value="Nobody   ">None</input>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" valign="top">Location:</td>
+                <td><select name="location" multiple size=3>
+                        <option value="nowhere">nowhere</option>
+                        <option value="somewhere">somewhere</option>
+                        <option value="here">here</option>
+                        <option value="there">there</option>
+                        <option value="everywhere">everywhere</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><br> <input value="Submit" type="submit" /></td>
+        </table>
+    </form>
+
+</body>
+</html>
