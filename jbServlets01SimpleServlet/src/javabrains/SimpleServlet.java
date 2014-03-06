@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SimpleServlet
  */
-@WebServlet(description = "A simple servlet", urlPatterns = { "/SimpleServletPath" })
+@WebServlet(description = "A simple servlet", urlPatterns = { "/SimpleServletPath" }, initParams={@WebInitParam(name="defaultUser", value="John Doe")} )
 // @formatter:on
 public class SimpleServlet extends HttpServlet
 {
@@ -41,6 +42,7 @@ public class SimpleServlet extends HttpServlet
         writer.println( "Request parameter has username as: " + userName );
         writer.println( "Session parameter has username as: " + (String)session.getAttribute( "savedUserName" ) );
         writer.println( "Context parameter has username as: " + (String)context.getAttribute( "savedUserName" ) );
+        writer.println( "Init parameter has default username as: " + this.getServletConfig().getInitParameter( "defaultUser" ));
     }
 
 }
